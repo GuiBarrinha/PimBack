@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.example.ApiTarefa.entities.Tarefa;
 import com.example.ApiTarefa.repository.TarefaRepository;
 
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 	public class TarefaService {
@@ -37,6 +36,10 @@ import jakarta.persistence.EntityNotFoundException;
 			entity.setTitulo(obj.getTitulo());
 			entity.setDescricao(obj.getDescricao());
 			entity.setStatus(obj.getStatus());
+		}
+
+		public void delete(Long id) {
+			repository.deleteById(id);
 		}
 
 
