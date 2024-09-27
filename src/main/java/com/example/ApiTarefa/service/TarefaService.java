@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.example.ApiTarefa.entities.Tarefa;
 import com.example.ApiTarefa.repository.TarefaRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 	public class TarefaService {
 
@@ -23,6 +25,20 @@ import com.example.ApiTarefa.repository.TarefaRepository;
 		public List<Tarefa> findAll() {
 			return repository.findAll();
 		}
+
+		// Alterar uma tarefa
+		public Tarefa update(Long id, Tarefa tarefa) {	
+				Tarefa entity = repository.getReferenceById(id);
+				updateData(entity, tarefa);
+				return repository.save(entity);
+		}
+		
+		private void updateData(Tarefa entity, Tarefa obj) {
+			entity.setTitulo(obj.getTitulo());
+			entity.setDescricao(obj.getDescricao());
+			entity.setStatus(obj.getStatus());
+		}
+
 
 
 }
