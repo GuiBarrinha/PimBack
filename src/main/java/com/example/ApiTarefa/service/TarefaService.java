@@ -1,6 +1,7 @@
 package com.example.ApiTarefa.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ import jakarta.persistence.EntityNotFoundException;
 			try {
 				Tarefa entity = repository.getReferenceById(id);
 				updateData(entity, tarefa);
-				return repository.save(entity);
+				return repository.save(tarefa);
 			} catch (EntityNotFoundException e) {
 				throw new ResourceNotFoundException();
 			}
@@ -51,6 +52,13 @@ import jakarta.persistence.EntityNotFoundException;
 			}
 			repository.deleteById(id);
 		}
+		
+		// Retorna uma tarefa pelo id
+		public Tarefa findById(long id) {
+			Optional<Tarefa> tarefa = repository.findById(id);
+			return tarefa.orElseThrow(() -> new ResourceNotFoundException());
+		}
+
 
 
 

@@ -7,6 +7,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -18,9 +21,22 @@ public class Tarefa implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@NotEmpty
+	@Size(min = 2, max = 100)
+	@NotNull
 	private String titulo;
+	
+	@NotEmpty
+	@Size(min = 2, max = 100)
+	@NotNull
 	private String descricao;
+	
+	@NotEmpty
+	@Size(min = 2, max = 100)
+	@NotNull
 	private String status;
+
 	
 	public Tarefa() {
 	}

@@ -44,17 +44,23 @@ public class TarefaController {
 
 	// Endpoint de alterar tarefa
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Tarefa> update(@PathVariable long id, @RequestBody Tarefa tarefa) {
+	public ResponseEntity<Tarefa> update(@PathVariable long id, @Valid @RequestBody Tarefa tarefa) {
 		tarefa = service.update(id, tarefa);
 		return ResponseEntity.ok().body(tarefa);
 	}
-	
-	//Endpoint de deletar tarefa
-		@DeleteMapping(value = "/{id}")
-		public ResponseEntity<Void>delete(@PathVariable long id){
-			service.delete(id);
-			return ResponseEntity.noContent().build();
-		}
 
+	// Endpoint de deletar tarefa
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> delete(@PathVariable long id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
+
+	// Endpoint de busca por id
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<Tarefa> findById(@PathVariable long id) {
+		Tarefa tarefa = service.findById(id);
+		return ResponseEntity.ok().body(tarefa);
+	}
 
 }
