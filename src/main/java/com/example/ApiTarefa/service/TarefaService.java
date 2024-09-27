@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.ApiTarefa.entities.Tarefa;
+import com.example.ApiTarefa.exception.ResourceNotFoundException;
 import com.example.ApiTarefa.repository.TarefaRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 
 @Service
@@ -27,9 +30,13 @@ import com.example.ApiTarefa.repository.TarefaRepository;
 
 		// Alterar uma tarefa
 		public Tarefa update(Long id, Tarefa tarefa) {	
+			try {
 				Tarefa entity = repository.getReferenceById(id);
 				updateData(entity, tarefa);
 				return repository.save(entity);
+			} catch (EntityNotFoundException e) {
+				throw new ResourceNotFoundException();
+			}
 		}
 		
 		private void updateData(Tarefa entity, Tarefa obj) {
@@ -39,6 +46,9 @@ import com.example.ApiTarefa.repository.TarefaRepository;
 		}
 
 		public void delete(Long id) {
+			if (!repository.existsById(id)) {
+				throw new ResourceNotFoundException();
+			}
 			repository.deleteById(id);
 		}
 
