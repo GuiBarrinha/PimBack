@@ -1,5 +1,7 @@
 package com.example.ApiTarefa.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +18,11 @@ import com.example.ApiTarefa.repository.TarefaRepository;
 		public Tarefa insert(Tarefa tarefa) {
 			return repository.save(tarefa);
 		}
+		
+		// Retorna uma lista de tarefas
+		public List<Tarefa> findAll() {
+			return repository.findAll();
+		}
+
 
 }

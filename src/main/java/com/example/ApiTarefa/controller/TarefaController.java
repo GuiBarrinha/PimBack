@@ -1,9 +1,11 @@
 package com.example.ApiTarefa.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,5 +31,13 @@ public class TarefaController {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(tarefa.getId()).toUri();
 		return ResponseEntity.created(uri).body(tarefa);
 	}
+	
+	//Endpoint de listar tarefa
+		@GetMapping
+		public ResponseEntity<List<Tarefa>> findAll() {
+			List<Tarefa> lista = service.findAll();
+			return ResponseEntity.ok().body(lista);
+		}
+
 
 }
