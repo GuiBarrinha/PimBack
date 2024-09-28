@@ -37,7 +37,6 @@ public class Tarefa implements Serializable{
 	@NotNull
 	private String status;
 
-	
 	public Tarefa() {
 	}
 

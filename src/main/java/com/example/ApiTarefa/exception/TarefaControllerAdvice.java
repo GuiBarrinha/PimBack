@@ -14,29 +14,31 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @ControllerAdvice
 public class TarefaControllerAdvice {
-	
+
+	// Mensagem quando tarefa não encontrada
 	@ResponseBody
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<MessageExceptionHandler> notFound(ResourceNotFoundException resourceNotFoundException) {
-		MessageExceptionHandler messageExceptionHandler = 
-				new MessageExceptionHandler(new Date(), HttpStatus.NOT_FOUND.value(), "Recurso não encontrado");
-						
-		return new ResponseEntity<>(messageExceptionHandler, HttpStatus.NOT_FOUND );
+		MessageExceptionHandler messageExceptionHandler = new MessageExceptionHandler(new Date(),
+				HttpStatus.NOT_FOUND.value(), "Recurso não encontrado");
+
+		return new ResponseEntity<>(messageExceptionHandler, HttpStatus.NOT_FOUND);
 	}
-	
+
+	// Mensagem status escrito incorretamente
 	@ResponseBody
 	@ExceptionHandler(StatusInvalidException.class)
 	public ResponseEntity<MessageExceptionHandler> statusInvalido(StatusInvalidException statusInvalidException) {
-		MessageExceptionHandler messageExceptionHandler = 
-				new MessageExceptionHandler(new Date(), HttpStatus.BAD_REQUEST.value(), "status validos: não iniciado, em andamento, concluído");
-						
-		return new ResponseEntity<>(messageExceptionHandler, HttpStatus.BAD_REQUEST );
+		MessageExceptionHandler messageExceptionHandler = new MessageExceptionHandler(new Date(),
+				HttpStatus.BAD_REQUEST.value(), "status validos: não iniciado, em andamento, concluído");
+
+		return new ResponseEntity<>(messageExceptionHandler, HttpStatus.BAD_REQUEST);
 	}
 
 	@ResponseBody
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<MessageExceptionHandler> argumentNotValid(MethodArgumentNotValidException notValid) {
-		
+
 		BindingResult bindingResult = notValid.getBindingResult();
 		List<FieldError> fieldErrors = bindingResult.getFieldErrors();
 		StringBuilder stringBuilder = new StringBuilder("erros");
@@ -48,12 +50,10 @@ public class TarefaControllerAdvice {
 			stringBuilder.append(fieldError.getDefaultMessage());
 			stringBuilder.append(" <- ");
 		}
-						
-		MessageExceptionHandler messageExceptionHandler = 
-				new MessageExceptionHandler(new Date(), HttpStatus.BAD_REQUEST.value(),stringBuilder.toString());
-						
-		return new ResponseEntity<>(messageExceptionHandler, HttpStatus.BAD_REQUEST );
-	}
-	
 
+		MessageExceptionHandler messageExceptionHandler = new MessageExceptionHandler(new Date(),
+				HttpStatus.BAD_REQUEST.value(), stringBuilder.toString());
+
+		return new ResponseEntity<>(messageExceptionHandler, HttpStatus.BAD_REQUEST);
+	}
 }

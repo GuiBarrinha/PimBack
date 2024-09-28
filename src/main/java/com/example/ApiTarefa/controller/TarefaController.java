@@ -64,5 +64,4 @@ public class TarefaController {
 		Tarefa tarefa = service.findById(id);
 		return ResponseEntity.ok().body(tarefa);
 	}
-
 }

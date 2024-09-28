@@ -21,14 +21,6 @@ public class TarefaService {
 
 	// Criar uma nova tarefa
 	public Tarefa insert(Tarefa tarefa) {
-//		System.out.println("status = " + tarefa.getStatus());
-//		if ((tarefa.getStatus().equalsIgnoreCase("não iniciado"))
-//				|| (tarefa.getStatus().equalsIgnoreCase("em andamento"))
-//				|| (tarefa.getStatus().equalsIgnoreCase("concluido"))) {
-//			return repository.save(tarefa);
-//		} else {
-//			throw new StatusInvalidException();
-//		}
 		validaStatus(tarefa.getStatus());
 		return repository.save(tarefa);
 	}
@@ -49,18 +41,6 @@ public class TarefaService {
 			throw new ResourceNotFoundException();
 		}
 	}
-	
-//	private void validaStatus(String status) {
-//		System.out.println("passou 1");
-//		if ((status.equalsIgnoreCase("não iniciado"))
-//				|| (status.equalsIgnoreCase("em andamento"))
-//				|| (status.equalsIgnoreCase("concluido"))) {
-//			System.out.println("passou 2");
-//		} else {
-//			System.out.println("passou 3");
-//			throw new StatusInvalidException();
-//		}
-//	}
 
 	private void updateData(Tarefa entity, Tarefa obj) {
 

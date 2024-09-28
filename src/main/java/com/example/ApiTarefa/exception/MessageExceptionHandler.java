@@ -9,7 +9,6 @@ public class MessageExceptionHandler {
 	private Integer status;
 	private String message;
 	
-	
 	public MessageExceptionHandler() {
 	}
 
@@ -42,5 +41,4 @@ public class MessageExceptionHandler {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
 }
