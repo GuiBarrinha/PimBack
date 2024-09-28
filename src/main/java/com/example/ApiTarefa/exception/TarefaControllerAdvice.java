@@ -23,6 +23,15 @@ public class TarefaControllerAdvice {
 						
 		return new ResponseEntity<>(messageExceptionHandler, HttpStatus.NOT_FOUND );
 	}
+	
+	@ResponseBody
+	@ExceptionHandler(StatusInvalidException.class)
+	public ResponseEntity<MessageExceptionHandler> statusInvalido(StatusInvalidException statusInvalidException) {
+		MessageExceptionHandler messageExceptionHandler = 
+				new MessageExceptionHandler(new Date(), HttpStatus.BAD_REQUEST.value(), "status validos: não iniciado, em andamento, concluído");
+						
+		return new ResponseEntity<>(messageExceptionHandler, HttpStatus.BAD_REQUEST );
+	}
 
 	@ResponseBody
 	@ExceptionHandler(MethodArgumentNotValidException.class)
@@ -45,4 +54,6 @@ public class TarefaControllerAdvice {
 						
 		return new ResponseEntity<>(messageExceptionHandler, HttpStatus.BAD_REQUEST );
 	}
+	
+
 }
